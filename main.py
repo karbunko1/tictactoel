@@ -54,12 +54,21 @@ class Jugador:
 class Juego():
 
     tokens = ['X', 'O']
-    posibilidades = [(1, 2, 3)] and [(4, 5, 6)] and [(7, 8, 9)] and [(1, 5, 9)] and [(3, 5, 7)] and [(1, 4, 7)] and [(3, 6, 9)]
+    posibilidades = [
+        (1, 2, 3), 
+        (4, 5, 6), 
+        (7, 8, 9), 
+        (1, 5, 9), 
+        (3, 5, 7), 
+        (1, 4, 7), 
+        (3, 6, 9),
+        (2, 5, 8)
+    ]
 
     def __init__(self):
         Tools.clearScreen()
         self.board = Board()
-        self.jugador = Jugador()
+        self.jugador = Jugador()      
 
     def juega(self):
         self.board.refresh_screen()
@@ -75,9 +84,8 @@ class Juego():
 
     def comprobarGanador(self, token):
         c = self.board.cells
-        for p in self.posibilidades:
-            jugada = [c[p[0]] + c[p[1]] + c[p[2]]]
-            jugada = c[1] + c[2] + c[3]
+        for p in self.posibilidades: 
+            jugada = c[p[0]] + c[p[1]] + c[p[2]]
             if jugada == token*3:
                 print(f"GANA {token}")
                 exit()
