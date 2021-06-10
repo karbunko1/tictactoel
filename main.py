@@ -55,12 +55,12 @@ class Juego():
 
     tokens = ['X', 'O']
     posibilidades = [
-        (1, 2, 3), 
-        (4, 5, 6), 
-        (7, 8, 9), 
-        (1, 5, 9), 
-        (3, 5, 7), 
-        (1, 4, 7), 
+        (1, 2, 3),
+        (4, 5, 6),
+        (7, 8, 9),
+        (1, 5, 9),
+        (3, 5, 7),
+        (1, 4, 7),
         (3, 6, 9),
         (2, 5, 8)
     ]
@@ -68,14 +68,21 @@ class Juego():
     def __init__(self):
         Tools.clearScreen()
         self.board = Board()
-        self.jugador = Jugador()      
+        self.jugador = Jugador()
 
     def juega(self):
+        contaturnos = 1
         self.board.refresh_screen()
         while True:
+              
             self.ejecutaTurno(self.tokens[0])
+            if contaturnos == 9:
+                print("EMPATE")
+                exit()
+            contaturnos += 1
             self.ejecutaTurno(self.tokens[1])
-
+            contaturnos += 1
+        
     def ejecutaTurno(self, token):
         choice = self.jugador.pedirJugadaJugador(token, self.board)
         self.board.update_cell(choice, token)
@@ -84,7 +91,7 @@ class Juego():
 
     def comprobarGanador(self, token):
         c = self.board.cells
-        for p in self.posibilidades: 
+        for p in self.posibilidades:
             jugada = c[p[0]] + c[p[1]] + c[p[2]]
             if jugada == token*3:
                 print(f"GANA {token}")
